@@ -230,6 +230,7 @@
     <Content Include="style\ref.css" />
     <Content Include="style\split-pane.css" />
     <Content Include="style\theme.css" />
+    <Content Include="test_basic.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
