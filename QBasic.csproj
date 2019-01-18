@@ -135,6 +135,7 @@
     <Content Include="fonts\zilla.ttf" />
     <Content Include="lib\clang-format.wasm" />
     <Content Include="lib\twiggy_wasm_api_bg.wasm" />
+    <Content Include="manifest.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
