@@ -1,0 +1,271 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2574F603-4B6C-4A30-BFDD-E3BC09EEDFDF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TypeScriptHTMLApp1</RootNamespace>
+    <AssemblyName>TypeScriptHTMLApp1</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="dist\0.bundle.js.map" />
+    <Content Include="dist\1.bundle.js.map" />
+    <Content Include="dist\10.bundle.js.map" />
+    <Content Include="dist\11.bundle.js.map" />
+    <Content Include="dist\12.bundle.js.map" />
+    <Content Include="dist\13.bundle.js.map" />
+    <Content Include="dist\14.bundle.js.map" />
+    <Content Include="dist\15.bundle.js.map" />
+    <Content Include="dist\16.bundle.js.map" />
+    <Content Include="dist\17.bundle.js.map" />
+    <Content Include="dist\18.bundle.js.map" />
+    <Content Include="dist\19.bundle.js.map" />
+    <Content Include="dist\20.bundle.js.map" />
+    <Content Include="dist\21.bundle.js.map" />
+    <Content Include="dist\22.bundle.js.map" />
+    <Content Include="dist\23.bundle.js.map" />
+    <Content Include="dist\24.bundle.js.map" />
+    <Content Include="dist\25.bundle.js.map" />
+    <Content Include="dist\26.bundle.js.map" />
+    <Content Include="dist\27.bundle.js.map" />
+    <Content Include="dist\28.bundle.js.map" />
+    <Content Include="dist\29.bundle.js.map" />
+    <Content Include="dist\3.bundle.js.map" />
+    <Content Include="dist\30.bundle.js.map" />
+    <Content Include="dist\31.bundle.js.map" />
+    <Content Include="dist\32.bundle.js.map" />
+    <Content Include="dist\33.bundle.js.map" />
+    <Content Include="dist\34.bundle.js.map" />
+    <Content Include="dist\35.bundle.js.map" />
+    <Content Include="dist\36.bundle.js.map" />
+    <Content Include="dist\37.bundle.js.map" />
+    <Content Include="dist\38.bundle.js.map" />
+    <Content Include="dist\39.bundle.js.map" />
+    <Content Include="dist\4.bundle.js.map" />
+    <Content Include="dist\40.bundle.js.map" />
+    <Content Include="dist\41.bundle.js.map" />
+    <Content Include="dist\42.bundle.js.map" />
+    <Content Include="dist\43.bundle.js.map" />
+    <Content Include="dist\44.bundle.js.map" />
+    <Content Include="dist\45.bundle.js.map" />
+    <Content Include="dist\46.bundle.js.map" />
+    <Content Include="dist\47.bundle.js.map" />
+    <Content Include="dist\48.bundle.js.map" />
+    <Content Include="dist\49.bundle.js.map" />
+    <Content Include="dist\5.bundle.js.map" />
+    <Content Include="dist\50.bundle.js.map" />
+    <Content Include="dist\51.bundle.js.map" />
+    <Content Include="dist\52.bundle.js.map" />
+    <Content Include="dist\53.bundle.js.map" />
+    <Content Include="dist\54.bundle.js.map" />
+    <Content Include="dist\55.bundle.js.map" />
+    <Content Include="dist\56.bundle.js.map" />
+    <Content Include="dist\57.bundle.js.map" />
+    <Content Include="dist\6.bundle.js.map" />
+    <Content Include="dist\7.bundle.js.map" />
+    <Content Include="dist\8.bundle.js.map" />
+    <Content Include="dist\9.bundle.js.map" />
+    <Content Include="dist\css.worker.js.map" />
+    <Content Include="dist\editor.worker.js.map" />
+    <Content Include="dist\html.worker.js.map" />
+    <Content Include="dist\json.worker.js.map" />
+    <Content Include="dist\main.bundle.js.map" />
+    <Content Include="dist\monaco-editor.bundle.js.map" />
+    <Content Include="dist\typescript.worker.js.map" />
+    <Content Include="fonts\octicons\octicons-local.ttf" />
+    <Content Include="fonts\octicons\octicons.eot" />
+    <Content Include="fonts\octicons\octicons.less" />
+    <Content Include="fonts\octicons\octicons.scss" />
+    <Content Include="fonts\octicons\octicons.ttf" />
+    <Content Include="fonts\octicons\octicons.woff" />
+    <Content Include="fonts\octicons\OSSREADME.json" />
+    <Content Include="fonts\octicons\README.md" />
+    <Content Include="fonts\octicons\sprockets-octicons.scss" />
+    <Content Include="fonts\roboto.ttf" />
+    <Content Include="fonts\seti-extra.woff" />
+    <Content Include="fonts\seti.woff" />
+    <Content Include="fonts\zilla.ttf" />
+    <Content Include="lib\clang-format.wasm" />
+    <Content Include="lib\twiggy_wasm_api_bg.wasm" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dist\0.bundle.js" />
+    <Content Include="dist\1.bundle.js" />
+    <Content Include="dist\10.bundle.js" />
+    <Content Include="dist\11.bundle.js" />
+    <Content Include="dist\12.bundle.js" />
+    <Content Include="dist\13.bundle.js" />
+    <Content Include="dist\14.bundle.js" />
+    <Content Include="dist\15.bundle.js" />
+    <Content Include="dist\16.bundle.js" />
+    <Content Include="dist\17.bundle.js" />
+    <Content Include="dist\18.bundle.js" />
+    <Content Include="dist\19.bundle.js" />
+    <Content Include="dist\20.bundle.js" />
+    <Content Include="dist\21.bundle.js" />
+    <Content Include="dist\22.bundle.js" />
+    <Content Include="dist\23.bundle.js" />
+    <Content Include="dist\24.bundle.js" />
+    <Content Include="dist\25.bundle.js" />
+    <Content Include="dist\26.bundle.js" />
+    <Content Include="dist\27.bundle.js" />
+    <Content Include="dist\28.bundle.js" />
+    <Content Include="dist\29.bundle.js" />
+    <Content Include="dist\3.bundle.js" />
+    <Content Include="dist\30.bundle.js" />
+    <Content Include="dist\31.bundle.js" />
+    <Content Include="dist\32.bundle.js" />
+    <Content Include="dist\33.bundle.js" />
+    <Content Include="dist\34.bundle.js" />
+    <Content Include="dist\35.bundle.js" />
+    <Content Include="dist\36.bundle.js" />
+    <Content Include="dist\37.bundle.js" />
+    <Content Include="dist\38.bundle.js" />
+    <Content Include="dist\39.bundle.js" />
+    <Content Include="dist\4.bundle.js" />
+    <Content Include="dist\40.bundle.js" />
+    <Content Include="dist\41.bundle.js" />
+    <Content Include="dist\42.bundle.js" />
+    <Content Include="dist\43.bundle.js" />
+    <Content Include="dist\44.bundle.js" />
+    <Content Include="dist\45.bundle.js" />
+    <Content Include="dist\46.bundle.js" />
+    <Content Include="dist\47.bundle.js" />
+    <Content Include="dist\48.bundle.js" />
+    <Content Include="dist\49.bundle.js" />
+    <Content Include="dist\5.bundle.js" />
+    <Content Include="dist\50.bundle.js" />
+    <Content Include="dist\51.bundle.js" />
+    <Content Include="dist\52.bundle.js" />
+    <Content Include="dist\53.bundle.js" />
+    <Content Include="dist\54.bundle.js" />
+    <Content Include="dist\55.bundle.js" />
+    <Content Include="dist\56.bundle.js" />
+    <Content Include="dist\57.bundle.js" />
+    <Content Include="dist\6.bundle.js" />
+    <Content Include="dist\7.bundle.js" />
+    <Content Include="dist\8.bundle.js" />
+    <Content Include="dist\9.bundle.js" />
+    <Content Include="dist\css.worker.js" />
+    <Content Include="dist\editor.worker.js" />
+    <Content Include="dist\html.worker.js" />
+    <Content Include="dist\json.worker.js" />
+    <Content Include="dist\main.bundle.js" />
+    <Content Include="dist\monaco-editor.bundle.js" />
+    <Content Include="dist\typescript.worker.js" />
+    <Content Include="fonts\octicons.css" />
+    <Content Include="fonts\octicons\octicons-animations.css" />
+    <Content Include="fonts\octicons\octicons.css" />
+    <Content Include="fonts\octicons\octicons.svg" />
+    <Content Include="fonts\roboto.css" />
+    <Content Include="fonts\seti-extra.css" />
+    <Content Include="fonts\seti.css" />
+    <Content Include="fonts\zilla.css" />
+    <Content Include="index.html" />
+    <Content Include="lib\capstone.x86.min.js" />
+    <Content Include="lib\clang-format.js" />
+    <Content Include="lib\ga.js" />
+    <Content Include="lib\markdown-it\markdown-it-center-text.min.js" />
+    <Content Include="lib\prettier\parser-typescript.js" />
+    <Content Include="lib\prettier\standalone.js" />
+    <Content Include="lib\require.js" />
+    <Content Include="lib\twiggy_wasm_api.js" />
+    <Content Include="lib\viz-lite.js" />
+    <Content Include="style\global.css" />
+    <Content Include="style\markdown.css" />
+    <Content Include="style\ref.css" />
+    <Content Include="style\split-pane.css" />
+    <Content Include="style\theme.css" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="lib\fiddle.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\katex\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>10202</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:10202/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
