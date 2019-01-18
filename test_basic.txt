@@ -8,7 +8,7 @@
 ' running into walls or other snakes.  The more numbers you eat up,
 ' the more points you gain and the longer your snake becomes.
 '
-' To run this game, press Shift+F5.
+' To run this game, press Ctrl+F5.
 '
 ' To exit QBasic, press Esc.
 '
