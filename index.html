@@ -17,6 +17,21 @@
     <script defer src="./lib/katex/katex.min.js"></script>
     <script defer src="./lib/katex/auto-render.min.js"></script>
     <link rel="manifest" href="manifest.json">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('serviceWorker.js')
+                .then(
+                function (registration) {
+                    if (typeof registration.update == 'function') {
+                        registration.update();
+                    }
+                })
+                .catch(function (error) {
+                    console.log("Error Log: " + error);
+                });
+        }
+    </script>
 </head>
 <body>
     <div id="app" class="show-file-icons"></div>
