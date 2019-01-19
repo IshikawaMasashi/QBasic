@@ -72,11 +72,11 @@ var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/dist/typescript.worker.js",
 
   // style
-  "https://ishikawamasashi.github.io/QBasic/dist/style/markdown.css",
-  "https://ishikawamasashi.github.io/QBasic/dist/style/ref.css",
-  "https://ishikawamasashi.github.io/QBasic/dist/style/split-pane.css",
-  "https://ishikawamasashi.github.io/QBasic/dist/style/theme.css",
-  "https://ishikawamasashi.github.io/QBasic/dist/style/global.css",
+  "https://ishikawamasashi.github.io/QBasic/style/markdown.css",
+  "https://ishikawamasashi.github.io/QBasic/style/ref.css",
+  "https://ishikawamasashi.github.io/QBasic/style/split-pane.css",
+  "https://ishikawamasashi.github.io/QBasic/style/theme.css",
+  "https://ishikawamasashi.github.io/QBasic/style/global.css",
 ];
 
 self.addEventListener('install', function (event) {
