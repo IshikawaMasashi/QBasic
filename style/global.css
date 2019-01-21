@@ -307,8 +307,10 @@ a {
 
 .tab {
     display: flex;
-    max-width: 150px;
-    min-width: fit-content;
+    /*max-width: 150px;
+    min-width: fit-content;*/
+    width: 150px;
+    justify-content:space-between;
     height: 100%;
     cursor: pointer;
     padding-left: 10px;
@@ -341,6 +343,7 @@ a {
         width: 16px;
         height: 16px;
         padding-right: 10px;
+        z-index: 1000;
     }
 
     .tab.active.marked > .close, .tab.marked > .close {
