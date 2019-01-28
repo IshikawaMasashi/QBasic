@@ -1,2 +1,74 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{557:function(e,n,t){"use strict";t.r(n),t.d(n,"conf",function(){return s}),t.d(n,"language",function(){return o});var s={comments:{lineComment:"//",blockComment:["(*","*)"]},brackets:[["{","}"],["[","]"],["(",")"]],autoClosingPairs:[{open:"{",close:"}"},{open:"[",close:"]"},{open:"(",close:")"},{open:'"',close:'"'}],surroundingPairs:[{open:"{",close:"}"},{open:"[",close:"]"},{open:"(",close:")"},{open:'"',close:'"'},{open:"'",close:"'"}],folding:{markers:{start:new RegExp("^\\s*//\\s*#region\\b|^\\s*\\(\\*\\s*#region(.*)\\*\\)"),end:new RegExp("^\\s*//\\s*#endregion\\b|^\\s*\\(\\*\\s*#endregion\\s*\\*\\)")}}},o={defaultToken:"",tokenPostfix:".fs",keywords:["abstract","and","atomic","as","assert","asr","base","begin","break","checked","component","const","constraint","constructor","continue","class","default","delegate","do","done","downcast","downto","elif","else","end","exception","eager","event","external","extern","false","finally","for","fun","function","fixed","functor","global","if","in","include","inherit","inline","interface","internal","land","lor","lsl","lsr","lxor","lazy","let","match","member","mod","module","mutable","namespace","method","mixin","new","not","null","of","open","or","object","override","private","parallel","process","protected","pure","public","rec","return","static","sealed","struct","sig","then","to","true","tailcall","trait","try","type","upcast","use","val","void","virtual","volatile","when","while","with","yield"],symbols:/[=><!~?:&|+\-*\^%;\.,\/]+/,escapes:/\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/,integersuffix:/[uU]?[yslnLI]?/,floatsuffix:/[fFmM]?/,tokenizer:{root:[[/[a-zA-Z_]\w*/,{cases:{"@keywords":{token:"keyword.$0"},"@default":"identifier"}}],{include:"@whitespace"},[/\[<.*>\]/,"annotation"],[/^#(if|else|endif)/,"keyword"],[/[{}()\[\]]/,"@brackets"],[/[<>](?!@symbols)/,"@brackets"],[/@symbols/,"delimiter"],[/\d*\d+[eE]([\-+]?\d+)?(@floatsuffix)/,"number.float"],[/\d*\.\d+([eE][\-+]?\d+)?(@floatsuffix)/,"number.float"],[/0x[0-9a-fA-F]+LF/,"number.float"],[/0x[0-9a-fA-F]+(@integersuffix)/,"number.hex"],[/0b[0-1]+(@integersuffix)/,"number.bin"],[/\d+(@integersuffix)/,"number"],[/[;,.]/,"delimiter"],[/"([^"\\]|\\.)*$/,"string.invalid"],[/"""/,"string",'@string."""'],[/"/,"string",'@string."'],[/\@"/,{token:"string.quote",next:"@litstring"}],[/'[^\\']'B?/,"string"],[/(')(@escapes)(')/,["string","string.escape","string"]],[/'/,"string.invalid"]],whitespace:[[/[ \t\r\n]+/,""],[/\(\*(?!\))/,"comment","@comment"],[/\/\/.*$/,"comment"]],comment:[[/[^\*]+/,"comment"],[/\*\)/,"comment","@pop"],[/\*/,"comment"]],string:[[/[^\\"]+/,"string"],[/@escapes/,"string.escape"],[/\\./,"string.escape.invalid"],[/("""|"B?)/,{cases:{"$#==$S2":{token:"string",next:"@pop"},"@default":"string"}}]],litstring:[[/[^"]+/,"string"],[/""/,"string.escape"],[/"/,{token:"string.quote",next:"@pop"}]]}}}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[15],{
+
+/***/ "./node_modules/monaco-editor/esm/vs/basic-languages/csp/csp.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/monaco-editor/esm/vs/basic-languages/csp/csp.js ***!
+  \**********************************************************************/
+/*! exports provided: conf, language */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "conf", function() { return conf; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "language", function() { return language; });
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+var conf = {
+    brackets: [],
+    autoClosingPairs: [],
+    surroundingPairs: []
+};
+var language = {
+    // Set defaultToken to invalid to see what you do not tokenize yet
+    // defaultToken: 'invalid',
+    keywords: [],
+    typeKeywords: [],
+    tokenPostfix: '.csp',
+    operators: [],
+    symbols: /[=><!~?:&|+\-*\/\^%]+/,
+    escapes: /\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/,
+    tokenizer: {
+        root: [
+            [/child-src/, 'string.quote'],
+            [/connect-src/, 'string.quote'],
+            [/default-src/, 'string.quote'],
+            [/font-src/, 'string.quote'],
+            [/frame-src/, 'string.quote'],
+            [/img-src/, 'string.quote'],
+            [/manifest-src/, 'string.quote'],
+            [/media-src/, 'string.quote'],
+            [/object-src/, 'string.quote'],
+            [/script-src/, 'string.quote'],
+            [/style-src/, 'string.quote'],
+            [/worker-src/, 'string.quote'],
+            [/base-uri/, 'string.quote'],
+            [/plugin-types/, 'string.quote'],
+            [/sandbox/, 'string.quote'],
+            [/disown-opener/, 'string.quote'],
+            [/form-action/, 'string.quote'],
+            [/frame-ancestors/, 'string.quote'],
+            [/report-uri/, 'string.quote'],
+            [/report-to/, 'string.quote'],
+            [/upgrade-insecure-requests/, 'string.quote'],
+            [/block-all-mixed-content/, 'string.quote'],
+            [/require-sri-for/, 'string.quote'],
+            [/reflected-xss/, 'string.quote'],
+            [/referrer/, 'string.quote'],
+            [/policy-uri/, 'string.quote'],
+            [/'self'/, 'string.quote'],
+            [/'unsafe-inline'/, 'string.quote'],
+            [/'unsafe-eval'/, 'string.quote'],
+            [/'strict-dynamic'/, 'string.quote'],
+            [/'unsafe-hashed-attributes'/, 'string.quote']
+        ]
+    }
+};
+
+
+/***/ })
+
+}]);
 //# sourceMappingURL=15.bundle.js.map
