@@ -1,4 +1,4 @@
-﻿var CACHE_NAME = "QBasic-cache-v6";
+﻿var CACHE_NAME = "QBasic-cache-v7";
 var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/",
   "https://ishikawamasashi.github.io/QBasic/index.html",
@@ -79,6 +79,10 @@ var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/style/global.css",
 ];
 
+const CACHE_KEYS = [
+  CACHE_NAME
+];
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -91,17 +95,31 @@ self.addEventListener('install', (event) => {
   );
 });
 
-self.addEventListener('activate', (event) => {
-  var cacheWhitelist = [CACHE_NAME];
+//self.addEventListener('activate', (event) => {
+//  var cacheWhitelist = [CACHE_NAME];
 
+//  event.waitUntil(
+//    caches.keys().then((cacheNames) => {
+//      return Promise.all(
+//        cacheNames.map((cacheName) => {
+//          // ホワイトリストにないキャッシュ(古いキャッシュ)は削除する
+//          if (cacheWhitelist.indexOf(cacheName) === -1) {
+//            return caches.delete(cacheName);
+//          }
+//        })
+//      );
+//    })
+//  );
+//});
+self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then(keys => {
       return Promise.all(
-        cacheNames.map((cacheName) => {
-          // ホワイトリストにないキャッシュ(古いキャッシュ)は削除する
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
+        keys.filter(key => {
+          return !CACHE_KEYS.includes(key);
+        }).map(key => {
+          // 不要なキャッシュを削除
+          return caches.delete(key);
         })
       );
     })
