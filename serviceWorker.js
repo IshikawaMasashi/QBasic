@@ -1,4 +1,4 @@
-﻿var CACHE_NAME = "QBasic-cache-v7";
+﻿var CACHE_NAME = "QBasic-cache-v8";
 var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/",
   "https://ishikawamasashi.github.io/QBasic/index.html",
@@ -83,34 +83,17 @@ const CACHE_KEYS = [
   CACHE_NAME
 ];
 
-self.addEventListener('install', (event) => {
+self.addEventListener('install', function (event) {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('Opened cache');
-
-        // 指定されたリソースをキャッシュに追加する
-        return cache.addAll(urlsToCache);
+    caches.open(CACHE_NAME) // 上記で指定しているキャッシュ名
+      .then(
+      function (cache) {
+        return cache.addAll(urlsToCache); // 指定したリソースをキャッシュへ追加
+        // 1つでも失敗したらService Workerのインストールはスキップされる
       })
   );
 });
 
-//self.addEventListener('activate', (event) => {
-//  var cacheWhitelist = [CACHE_NAME];
-
-//  event.waitUntil(
-//    caches.keys().then((cacheNames) => {
-//      return Promise.all(
-//        cacheNames.map((cacheName) => {
-//          // ホワイトリストにないキャッシュ(古いキャッシュ)は削除する
-//          if (cacheWhitelist.indexOf(cacheName) === -1) {
-//            return caches.delete(cacheName);
-//          }
-//        })
-//      );
-//    })
-//  );
-//});
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => {
