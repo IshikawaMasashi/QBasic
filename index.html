@@ -19,9 +19,13 @@
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('serviceWorker.js')
-                .then(
-                function (registration) {
-                    if (typeof registration.update == 'function') {
+                .then(registration => {
+                    //if (typeof registration.update == 'function') {
+                    //    registration.update();
+                    //}
+                    // 登録成功
+                    registration.onupdatefound = function () {
+                        console.log('アップデートがあります！');
                         registration.update();
                     }
                 })
