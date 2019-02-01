@@ -77,6 +77,7 @@
     <Content Include="dist\17.bundle.js.map" />
     <Content Include="dist\18.bundle.js.map" />
     <Content Include="dist\19.bundle.js.map" />
+    <Content Include="dist\2.bundle.js" />
     <Content Include="dist\20.bundle.js.map" />
     <Content Include="dist\21.bundle.js.map" />
     <Content Include="dist\22.bundle.js.map" />
@@ -128,7 +129,10 @@
     <Content Include="dist\json.worker.js.map" />
     <Content Include="dist\main.bundle.js.map" />
     <Content Include="dist\monaco-editor.bundle.js.map" />
+    <Content Include="dist\syntax-highlighter.js" />
     <Content Include="dist\typescript.worker.js.map" />
+    <Content Include="dist\vendors~monaco-editor~monaco-languages.bundle.js" />
+    <Content Include="dist\worker.bundle.js" />
     <Content Include="firefox\firefox-general-128-128.png" />
     <Content Include="firefox\firefox-general-16-16.png" />
     <Content Include="firefox\firefox-general-256-256.png" />
@@ -240,6 +244,9 @@
     <Content Include="windows\windowsphone-storelogo-120-120.png" />
     <Content Include="windows\windowsphone-storelogo-50-50.png" />
     <Content Include="windows\windowsphone-storelogo-70-70.png" />
+    <Content Include="dist\2.bundle.js.map" />
+    <Content Include="dist\vendors~monaco-editor~monaco-languages.bundle.js.map" />
+    <Content Include="dist\worker.bundle.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
