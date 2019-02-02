@@ -1,0 +1,1 @@
+export declare const code_PrintUsing = "\nX = 1234567890\nY = 1234\nZ = 123\n\nPRINT USING \"#,###,###,###\"; X \nPRINT USING \"#,###,###,###\"; Y\nPRINT USING \"#,###,###,###\"; Z\n\nP=3.141592\nQ = 2 * P\nR = 0.5\nPRINT USING \"#.###\"; P\n\nPRINT USING \"#.### #.##\"; P;Q\n\nPRINT USING \"#.###\"; R\n\n";
