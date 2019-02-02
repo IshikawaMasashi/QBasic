@@ -1,4 +1,4 @@
-﻿var CACHE_NAME = "QBasic-cache-v12"; 
+﻿var CACHE_NAME = "QBasic-cache-v13"; 
 var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/",
   "https://ishikawamasashi.github.io/QBasic/index.html",
@@ -72,8 +72,8 @@ var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/dist/json.worker.js",
   "https://ishikawamasashi.github.io/QBasic/dist/typescript.worker.js",
 
-  "https://ishikawamasashi.github.io/QBasic/dist/vendors~monaco-editor~monaco-languages.bundle",
-  "https://ishikawamasashi.github.io/QBasic/dist/worker.bundle",
+  "https://ishikawamasashi.github.io/QBasic/dist/vendors~monaco-editor~monaco-languages.bundle.js",
+  "https://ishikawamasashi.github.io/QBasic/dist/worker.bundle.js",
   // style
   "https://ishikawamasashi.github.io/QBasic/style/markdown.css",
   "https://ishikawamasashi.github.io/QBasic/style/ref.css",
