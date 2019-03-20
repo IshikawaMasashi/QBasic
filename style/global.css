@@ -310,7 +310,7 @@ a {
     /*max-width: 150px;
     min-width: fit-content;*/
     width: 150px;
-    justify-content:space-between;
+    justify-content: space-between;
     height: 100%;
     cursor: pointer;
     padding-left: 10px;
@@ -384,23 +384,7 @@ a {
         align-items: center;
     }
 
-.status-bar {
-    color: rgb(255, 255, 255);
-    background-color: var(--title);
-    height: 22px;
-    font-size: 12px;
-    -moz-user-select: none;
-    user-select: none;
-    font-weight: 700;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe WPC,Segoe UI,HelveticaNeue-Light,Ubuntu,Droid Sans,sans-serif;
-    display: flex;
-}
 
-    .status-bar.active {
-        animation-name: pulse-status-bar;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
-    }
 
 @keyframes pulse-status-bar {
     0% {
@@ -1195,4 +1179,11 @@ a {
     vertical-align: middle;
     margin-left: 2rem;
     line-height: 18px;
+}
+
+
+
+.content {
+    display: flex;
+    height: calc(100% - 44px);
 }
