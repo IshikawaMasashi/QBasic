@@ -26,6 +26,7 @@ function removeProperty(text, path, formattingOptions) {
     return setProperty(text, path, void 0, formattingOptions);
 }
 function setProperty(text, originalPath, value, formattingOptions, getInsertionIndex) {
+    var _a;
     var path = originalPath.slice();
     var errors = [];
     var root = Object(_parser_js__WEBPACK_IMPORTED_MODULE_1__["parseTree"])(text, errors);
@@ -148,7 +149,6 @@ function setProperty(text, originalPath, value, formattingOptions, getInsertionI
     else {
         throw new Error("Can not add " + (typeof lastSegment !== 'number' ? 'index' : 'property') + " to parent of type " + parent.type);
     }
-    var _a;
 }
 function withFormatting(text, edit, formattingOptions) {
     // apply the edit
@@ -423,6 +423,12 @@ __webpack_require__.r(__webpack_exports__);
  *--------------------------------------------------------------------------------------------*/
 
 
+var ParseOptions;
+(function (ParseOptions) {
+    ParseOptions.DEFAULT = {
+        allowTrailingComma: false
+    };
+})(ParseOptions || (ParseOptions = {}));
 /**
  * For a given offset, evaluate the location in the JSON document. Each segment in the location path is either a property name or an array index.
  */
@@ -548,6 +554,7 @@ function getLocation(text, position) {
  */
 function parse(text, errors, options) {
     if (errors === void 0) { errors = []; }
+    if (options === void 0) { options = ParseOptions.DEFAULT; }
     var currentProperty = null;
     var currentParent = [];
     var previousParents = [];
@@ -596,6 +603,7 @@ function parse(text, errors, options) {
  */
 function parseTree(text, errors, options) {
     if (errors === void 0) { errors = []; }
+    if (options === void 0) { options = ParseOptions.DEFAULT; }
     var currentParent = { type: 'array', offset: -1, length: -1, children: [], parent: void 0 }; // artificial root
     function ensurePropertyComplete(endOffset) {
         if (currentParent.type === 'property') {
@@ -763,6 +771,7 @@ function findNodeAtOffset(node, offset, includeRightBound) {
  * Parses the given text and invokes the visitor functions for each object, array and literal reached.
  */
 function visit(text, visitor, options) {
+    if (options === void 0) { options = ParseOptions.DEFAULT; }
     var _scanner = Object(_scanner_js__WEBPACK_IMPORTED_MODULE_0__["createScanner"])(text, false);
     function toNoArgVisit(visitFunction) {
         return visitFunction ? function () { return visitFunction(_scanner.getTokenOffset(), _scanner.getTokenLength()); } : function () { return true; };
@@ -1270,10 +1279,11 @@ function createScanner(text, ignoreTrivia) {
                 // Multi-line comment
                 if (text.charCodeAt(pos + 1) === 42 /* asterisk */) {
                     pos += 2;
+                    var safeLength = len - 1; // For lookahead.
                     var commentClosed = false;
-                    while (pos < len) {
+                    while (pos < safeLength) {
                         var ch = text.charCodeAt(pos);
-                        if (ch === 42 /* asterisk */ && (pos + 1 < len) && text.charCodeAt(pos + 1) === 47 /* slash */) {
+                        if (ch === 42 /* asterisk */ && text.charCodeAt(pos + 1) === 47 /* slash */) {
                             pos += 2;
                             commentClosed = true;
                             break;
@@ -1390,7 +1400,7 @@ function isDigit(ch) {
 /*!************************************************************************************!*\
   !*** ./node_modules/monaco-editor/esm/vs/language/json/_deps/jsonc-parser/main.js ***!
   \************************************************************************************/
-/*! exports provided: createScanner, getLocation, parse, parseTree, findNodeAtLocation, findNodeAtOffset, getNodePath, getNodeValue, visit, stripComments, format, modify, applyEdits */
+/*! exports provided: createScanner, getLocation, parse, parseTree, findNodeAtLocation, findNodeAtOffset, getNodePath, getNodeValue, visit, stripComments, printParseErrorCode, format, modify, applyEdits */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1405,6 +1415,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNodeValue", function() { return getNodeValue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "visit", function() { return visit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stripComments", function() { return stripComments; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "printParseErrorCode", function() { return printParseErrorCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "format", function() { return format; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "modify", function() { return modify; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyEdits", function() { return applyEdits; });
@@ -1465,6 +1476,27 @@ var visit = _impl_parser_js__WEBPACK_IMPORTED_MODULE_3__["visit"];
  * of comments with a replaceCharacter
  */
 var stripComments = _impl_parser_js__WEBPACK_IMPORTED_MODULE_3__["stripComments"];
+function printParseErrorCode(code) {
+    switch (code) {
+        case 1 /* InvalidSymbol */: return 'InvalidSymbol';
+        case 2 /* InvalidNumberFormat */: return 'InvalidNumberFormat';
+        case 3 /* PropertyNameExpected */: return 'PropertyNameExpected';
+        case 4 /* ValueExpected */: return 'ValueExpected';
+        case 5 /* ColonExpected */: return 'ColonExpected';
+        case 6 /* CommaExpected */: return 'CommaExpected';
+        case 7 /* CloseBraceExpected */: return 'CloseBraceExpected';
+        case 8 /* CloseBracketExpected */: return 'CloseBracketExpected';
+        case 9 /* EndOfFileExpected */: return 'EndOfFileExpected';
+        case 10 /* InvalidCommentToken */: return 'InvalidCommentToken';
+        case 11 /* UnexpectedEndOfComment */: return 'UnexpectedEndOfComment';
+        case 12 /* UnexpectedEndOfString */: return 'UnexpectedEndOfString';
+        case 13 /* UnexpectedEndOfNumber */: return 'UnexpectedEndOfNumber';
+        case 14 /* InvalidUnicode */: return 'InvalidUnicode';
+        case 15 /* InvalidEscapeCharacter */: return 'InvalidEscapeCharacter';
+        case 16 /* InvalidCharacter */: return 'InvalidCharacter';
+    }
+    return '<unknown ParseErrorCode>';
+}
 /**
  * Computes the edits needed to format a JSON document.
  *
@@ -1515,7 +1547,7 @@ function applyEdits(text, edits) {
 /*!***************************************************************************************************!*\
   !*** ./node_modules/monaco-editor/esm/vs/language/json/_deps/vscode-languageserver-types/main.js ***!
   \***************************************************************************************************/
-/*! exports provided: Position, Range, Location, Color, ColorInformation, ColorPresentation, FoldingRangeKind, FoldingRange, DiagnosticRelatedInformation, DiagnosticSeverity, Diagnostic, Command, TextEdit, TextDocumentEdit, WorkspaceEdit, WorkspaceChange, TextDocumentIdentifier, VersionedTextDocumentIdentifier, TextDocumentItem, MarkupKind, MarkupContent, CompletionItemKind, InsertTextFormat, CompletionItem, CompletionList, MarkedString, Hover, ParameterInformation, SignatureInformation, DocumentHighlightKind, DocumentHighlight, SymbolKind, SymbolInformation, DocumentSymbol, CodeActionKind, CodeActionContext, CodeAction, CodeLens, FormattingOptions, DocumentLink, EOL, TextDocument, TextDocumentSaveReason */
+/*! exports provided: Position, Range, Location, LocationLink, Color, ColorInformation, ColorPresentation, FoldingRangeKind, FoldingRange, DiagnosticRelatedInformation, DiagnosticSeverity, Diagnostic, Command, TextEdit, TextDocumentEdit, CreateFile, RenameFile, DeleteFile, WorkspaceEdit, WorkspaceChange, TextDocumentIdentifier, VersionedTextDocumentIdentifier, TextDocumentItem, MarkupKind, MarkupContent, CompletionItemKind, InsertTextFormat, CompletionItem, CompletionList, MarkedString, Hover, ParameterInformation, SignatureInformation, DocumentHighlightKind, DocumentHighlight, SymbolKind, SymbolInformation, DocumentSymbol, CodeActionKind, CodeActionContext, CodeAction, CodeLens, FormattingOptions, DocumentLink, EOL, TextDocument, TextDocumentSaveReason */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1523,6 +1555,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Position", function() { return Position; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Range", function() { return Range; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Location", function() { return Location; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LocationLink", function() { return LocationLink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Color", function() { return Color; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ColorInformation", function() { return ColorInformation; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ColorPresentation", function() { return ColorPresentation; });
@@ -1534,6 +1567,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Command", function() { return Command; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TextEdit", function() { return TextEdit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TextDocumentEdit", function() { return TextDocumentEdit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateFile", function() { return CreateFile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RenameFile", function() { return RenameFile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeleteFile", function() { return DeleteFile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WorkspaceEdit", function() { return WorkspaceEdit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WorkspaceChange", function() { return WorkspaceChange; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TextDocumentIdentifier", function() { return TextDocumentIdentifier; });
@@ -1643,6 +1679,34 @@ var Location;
     }
     Location.is = is;
 })(Location || (Location = {}));
+/**
+ * The LocationLink namespace provides helper functions to work with
+ * [LocationLink](#LocationLink) literals.
+ */
+var LocationLink;
+(function (LocationLink) {
+    /**
+     * Creates a LocationLink literal.
+     * @param targetUri The definition's uri.
+     * @param targetRange The full range of the definition.
+     * @param targetSelectionRange The span of the symbol definition at the target.
+     * @param originSelectionRange The span of the symbol being defined in the originating source file.
+     */
+    function create(targetUri, targetRange, targetSelectionRange, originSelectionRange) {
+        return { targetUri: targetUri, targetRange: targetRange, targetSelectionRange: targetSelectionRange, originSelectionRange: originSelectionRange };
+    }
+    LocationLink.create = create;
+    /**
+     * Checks whether the given literal conforms to the [LocationLink](#LocationLink) interface.
+     */
+    function is(value) {
+        var candidate = value;
+        return Is.defined(candidate) && Range.is(candidate.targetRange) && Is.string(candidate.targetUri)
+            && (Range.is(candidate.targetSelectionRange) || Is.undefined(candidate.targetSelectionRange))
+            && (Range.is(candidate.originSelectionRange) || Is.undefined(candidate.originSelectionRange));
+    }
+    LocationLink.is = is;
+})(LocationLink || (LocationLink = {}));
 /**
  * The Color namespace provides helper functions to work with
  * [Color](#Color) literals.
@@ -1961,13 +2025,84 @@ var TextDocumentEdit;
     }
     TextDocumentEdit.is = is;
 })(TextDocumentEdit || (TextDocumentEdit = {}));
+var CreateFile;
+(function (CreateFile) {
+    function create(uri, options) {
+        var result = {
+            kind: 'create',
+            uri: uri
+        };
+        if (options !== void 0 && (options.overwrite !== void 0 || options.ignoreIfExists !== void 0)) {
+            result.options = options;
+        }
+        return result;
+    }
+    CreateFile.create = create;
+    function is(value) {
+        var candidate = value;
+        return candidate && candidate.kind === 'create' && Is.string(candidate.uri) &&
+            (candidate.options === void 0 ||
+                ((candidate.options.overwrite === void 0 || Is.boolean(candidate.options.overwrite)) && (candidate.options.ignoreIfExists === void 0 || Is.boolean(candidate.options.ignoreIfExists))));
+    }
+    CreateFile.is = is;
+})(CreateFile || (CreateFile = {}));
+var RenameFile;
+(function (RenameFile) {
+    function create(oldUri, newUri, options) {
+        var result = {
+            kind: 'rename',
+            oldUri: oldUri,
+            newUri: newUri
+        };
+        if (options !== void 0 && (options.overwrite !== void 0 || options.ignoreIfExists !== void 0)) {
+            result.options = options;
+        }
+        return result;
+    }
+    RenameFile.create = create;
+    function is(value) {
+        var candidate = value;
+        return candidate && candidate.kind === 'rename' && Is.string(candidate.oldUri) && Is.string(candidate.newUri) &&
+            (candidate.options === void 0 ||
+                ((candidate.options.overwrite === void 0 || Is.boolean(candidate.options.overwrite)) && (candidate.options.ignoreIfExists === void 0 || Is.boolean(candidate.options.ignoreIfExists))));
+    }
+    RenameFile.is = is;
+})(RenameFile || (RenameFile = {}));
+var DeleteFile;
+(function (DeleteFile) {
+    function create(uri, options) {
+        var result = {
+            kind: 'delete',
+            uri: uri
+        };
+        if (options !== void 0 && (options.recursive !== void 0 || options.ignoreIfNotExists !== void 0)) {
+            result.options = options;
+        }
+        return result;
+    }
+    DeleteFile.create = create;
+    function is(value) {
+        var candidate = value;
+        return candidate && candidate.kind === 'delete' && Is.string(candidate.uri) &&
+            (candidate.options === void 0 ||
+                ((candidate.options.recursive === void 0 || Is.boolean(candidate.options.recursive)) && (candidate.options.ignoreIfNotExists === void 0 || Is.boolean(candidate.options.ignoreIfNotExists))));
+    }
+    DeleteFile.is = is;
+})(DeleteFile || (DeleteFile = {}));
 var WorkspaceEdit;
 (function (WorkspaceEdit) {
     function is(value) {
         var candidate = value;
         return candidate &&
             (candidate.changes !== void 0 || candidate.documentChanges !== void 0) &&
-            (candidate.documentChanges === void 0 || Is.typedArray(candidate.documentChanges, TextDocumentEdit.is));
+            (candidate.documentChanges === void 0 || candidate.documentChanges.every(function (change) {
+                if (Is.string(change.kind)) {
+                    return CreateFile.is(change) || RenameFile.is(change) || DeleteFile.is(change);
+                }
+                else {
+                    return TextDocumentEdit.is(change);
+                }
+            }));
     }
     WorkspaceEdit.is = is;
 })(WorkspaceEdit || (WorkspaceEdit = {}));
@@ -2005,9 +2140,11 @@ var WorkspaceChange = /** @class */ (function () {
         if (workspaceEdit) {
             this._workspaceEdit = workspaceEdit;
             if (workspaceEdit.documentChanges) {
-                workspaceEdit.documentChanges.forEach(function (textDocumentEdit) {
-                    var textEditChange = new TextEditChangeImpl(textDocumentEdit.edits);
-                    _this._textEditChanges[textDocumentEdit.textDocument.uri] = textEditChange;
+                workspaceEdit.documentChanges.forEach(function (change) {
+                    if (TextDocumentEdit.is(change)) {
+                        var textEditChange = new TextEditChangeImpl(change.edits);
+                        _this._textEditChanges[change.textDocument.uri] = textEditChange;
+                    }
                 });
             }
             else if (workspaceEdit.changes) {
@@ -2037,7 +2174,7 @@ var WorkspaceChange = /** @class */ (function () {
                 };
             }
             if (!this._workspaceEdit.documentChanges) {
-                throw new Error('Workspace edit is not configured for versioned document changes.');
+                throw new Error('Workspace edit is not configured for document changes.');
             }
             var textDocument = key;
             var result = this._textEditChanges[textDocument.uri];
@@ -2070,6 +2207,23 @@ var WorkspaceChange = /** @class */ (function () {
                 this._textEditChanges[key] = result;
             }
             return result;
+        }
+    };
+    WorkspaceChange.prototype.createFile = function (uri, options) {
+        this.checkDocumentChanges();
+        this._workspaceEdit.documentChanges.push(CreateFile.create(uri, options));
+    };
+    WorkspaceChange.prototype.renameFile = function (oldUri, newUri, options) {
+        this.checkDocumentChanges();
+        this._workspaceEdit.documentChanges.push(RenameFile.create(oldUri, newUri, options));
+    };
+    WorkspaceChange.prototype.deleteFile = function (uri, options) {
+        this.checkDocumentChanges();
+        this._workspaceEdit.documentChanges.push(DeleteFile.create(uri, options));
+    };
+    WorkspaceChange.prototype.checkDocumentChanges = function () {
+        if (!this._workspaceEdit || !this._workspaceEdit.documentChanges) {
+            throw new Error('Workspace edit is not configured for document changes.');
         }
     };
     return WorkspaceChange;
@@ -2118,7 +2272,7 @@ var VersionedTextDocumentIdentifier;
      */
     function is(value) {
         var candidate = value;
-        return Is.defined(candidate) && Is.string(candidate.uri) && Is.number(candidate.version);
+        return Is.defined(candidate) && Is.string(candidate.uri) && (candidate.version === null || Is.number(candidate.version));
     }
     VersionedTextDocumentIdentifier.is = is;
 })(VersionedTextDocumentIdentifier || (VersionedTextDocumentIdentifier = {}));
@@ -2299,7 +2453,7 @@ var Hover;
      */
     function is(value) {
         var candidate = value;
-        return Is.objectLiteral(candidate) && (MarkupContent.is(candidate.contents) ||
+        return !!candidate && Is.objectLiteral(candidate) && (MarkupContent.is(candidate.contents) ||
             MarkedString.is(candidate.contents) ||
             Is.typedArray(candidate.contents, MarkedString.is)) && (value.range === void 0 || Range.is(value.range));
     }
@@ -2723,7 +2877,7 @@ var TextDocument;
                 text = text.substring(0, startOffset) + e.newText + text.substring(endOffset, text.length);
             }
             else {
-                throw new Error('Ovelapping edit');
+                throw new Error('Overlapping edit');
             }
             lastModifiedOffset = startOffset;
         }
@@ -3093,7 +3247,7 @@ var DiagnosticsAdapter = /** @class */ (function () {
             return worker.doValidation(resource.toString()).then(function (diagnostics) {
                 var markers = diagnostics.map(function (d) { return toDiagnostics(resource, d); });
                 var model = monaco.editor.getModel(resource);
-                if (model.getModeId() === languageId) {
+                if (model && model.getModeId() === languageId) {
                     monaco.editor.setModelMarkers(model, languageId, markers);
                 }
             });
@@ -3215,7 +3369,6 @@ var CompletionAdapter = /** @class */ (function () {
         configurable: true
     });
     CompletionAdapter.prototype.provideCompletionItems = function (model, position, context, token) {
-        var wordInfo = model.getWordUntilPosition(position);
         var resource = model.uri;
         return this._worker(resource).then(function (worker) {
             return worker.doComplete(resource.toString(), fromPosition(position));
@@ -3223,6 +3376,8 @@ var CompletionAdapter = /** @class */ (function () {
             if (!info) {
                 return;
             }
+            var wordInfo = model.getWordUntilPosition(position);
+            var wordRange = new Range(position.lineNumber, wordInfo.startColumn, position.lineNumber, wordInfo.endColumn);
             var items = info.items.map(function (entry) {
                 var item = {
                     label: entry.label,
@@ -3231,6 +3386,7 @@ var CompletionAdapter = /** @class */ (function () {
                     filterText: entry.filterText,
                     documentation: entry.documentation,
                     detail: entry.detail,
+                    range: wordRange,
                     kind: toCompletionItemKind(entry.kind),
                 };
                 if (entry.textEdit) {
