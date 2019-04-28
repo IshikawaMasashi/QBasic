@@ -1,4 +1,4 @@
-﻿var CACHE_NAME = "QBasic-cache-v18";
+﻿var CACHE_NAME = "QBasic-cache-v19";
 var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/",
   "https://ishikawamasashi.github.io/QBasic/index.html",
@@ -6,8 +6,8 @@ var urlsToCache = [
   // dist
   "https://ishikawamasashi.github.io/QBasic/dist/0.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/1.bundle.js",
-  "https://ishikawamasashi.github.io/QBasic/dist/2.bundle.js",
-  "https://ishikawamasashi.github.io/QBasic/dist/3.bundle.js",
+  // "https://ishikawamasashi.github.io/QBasic/dist/2.bundle.js",
+  // "https://ishikawamasashi.github.io/QBasic/dist/3.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/4.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/5.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/6.bundle.js",
@@ -85,7 +85,8 @@ var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/style/split-pane.css",
   "https://ishikawamasashi.github.io/QBasic/style/theme.css",
   "https://ishikawamasashi.github.io/QBasic/style/global.css",
-  "https://cdnjs.cloudflare.com/ajax/libs/typescript/3.4.4/typescript.min.js"
+
+  "https://ishikawamasashi.github.io/QBasic/lib/typescript/typescript.min.js"
 ];
 
 const CACHE_KEYS = [CACHE_NAME];
