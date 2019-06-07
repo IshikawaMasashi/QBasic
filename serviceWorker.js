@@ -1,4 +1,4 @@
-﻿var CACHE_NAME = "QBasic-cache-v19";
+﻿var CACHE_NAME = "QBasic-cache-v20";
 var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/",
   "https://ishikawamasashi.github.io/QBasic/index.html",
@@ -6,8 +6,8 @@ var urlsToCache = [
   // dist
   "https://ishikawamasashi.github.io/QBasic/dist/0.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/1.bundle.js",
-  // "https://ishikawamasashi.github.io/QBasic/dist/2.bundle.js",
-  // "https://ishikawamasashi.github.io/QBasic/dist/3.bundle.js",
+   "https://ishikawamasashi.github.io/QBasic/dist/2.bundle.js",
+   "https://ishikawamasashi.github.io/QBasic/dist/3.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/4.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/5.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/6.bundle.js",
