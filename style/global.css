@@ -55,6 +55,7 @@ body {
 body {
   margin: 0;
   padding: 0;
+  color: #ffffff;
 }
 
 input {
@@ -293,10 +294,6 @@ a {
 
 .tabs-tab-container > .react-contextmenu-wrapper {
   max-width: 150px;
-}
-
-.tabs-command-container {
-  display: flex;
 }
 
 .tab:not(:last-child) {

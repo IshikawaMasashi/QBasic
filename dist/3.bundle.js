@@ -183,7 +183,7 @@ function applyEdit(text, edit) {
 function isWS(text, offset) {
     return '\r\n \t'.indexOf(text.charAt(offset)) !== -1;
 }
-//# sourceMappingURL=edit.js.map
+
 
 /***/ }),
 
@@ -393,7 +393,7 @@ function getEOL(options, text) {
 function isEOL(text, offset) {
     return '\r\n'.indexOf(text.charAt(offset)) !== -1;
 }
-//# sourceMappingURL=format.js.map
+
 
 /***/ }),
 
@@ -774,10 +774,10 @@ function visit(text, visitor, options) {
     if (options === void 0) { options = ParseOptions.DEFAULT; }
     var _scanner = Object(_scanner_js__WEBPACK_IMPORTED_MODULE_0__["createScanner"])(text, false);
     function toNoArgVisit(visitFunction) {
-        return visitFunction ? function () { return visitFunction(_scanner.getTokenOffset(), _scanner.getTokenLength()); } : function () { return true; };
+        return visitFunction ? function () { return visitFunction(_scanner.getTokenOffset(), _scanner.getTokenLength(), _scanner.getTokenStartLine(), _scanner.getTokenStartCharacter()); } : function () { return true; };
     }
     function toOneArgVisit(visitFunction) {
-        return visitFunction ? function (arg) { return visitFunction(arg, _scanner.getTokenOffset(), _scanner.getTokenLength()); } : function () { return true; };
+        return visitFunction ? function (arg) { return visitFunction(arg, _scanner.getTokenOffset(), _scanner.getTokenLength(), _scanner.getTokenStartLine(), _scanner.getTokenStartCharacter()); } : function () { return true; };
     }
     var onObjectBegin = toNoArgVisit(visitor.onObjectBegin), onObjectProperty = toOneArgVisit(visitor.onObjectProperty), onObjectEnd = toNoArgVisit(visitor.onObjectEnd), onArrayBegin = toNoArgVisit(visitor.onArrayBegin), onArrayEnd = toNoArgVisit(visitor.onArrayEnd), onLiteralValue = toOneArgVisit(visitor.onLiteralValue), onSeparator = toOneArgVisit(visitor.onSeparator), onComment = toNoArgVisit(visitor.onComment), onError = toOneArgVisit(visitor.onError);
     var disallowComments = options && options.disallowComments;
@@ -1029,7 +1029,7 @@ function getLiteralNodeType(value) {
         default: return 'null';
     }
 }
-//# sourceMappingURL=parser.js.map
+
 
 /***/ }),
 
@@ -1054,7 +1054,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 function createScanner(text, ignoreTrivia) {
     if (ignoreTrivia === void 0) { ignoreTrivia = false; }
-    var pos = 0, len = text.length, value = '', tokenOffset = 0, token = 16 /* Unknown */, scanError = 0 /* None */;
+    var pos = 0, len = text.length, value = '', tokenOffset = 0, token = 16 /* Unknown */, lineNumber = 0, lineStartOffset = 0, tokenLineStartOffset = 0, prevTokenLineStartOffset = 0, scanError = 0 /* None */;
     function scanHexDigits(count, exact) {
         var digits = 0;
         var value = 0;
@@ -1211,6 +1211,8 @@ function createScanner(text, ignoreTrivia) {
         value = '';
         scanError = 0 /* None */;
         tokenOffset = pos;
+        lineStartOffset = lineNumber;
+        prevTokenLineStartOffset = tokenLineStartOffset;
         if (pos >= len) {
             // at the end
             tokenOffset = len;
@@ -1234,6 +1236,8 @@ function createScanner(text, ignoreTrivia) {
                 pos++;
                 value += '\n';
             }
+            lineNumber++;
+            tokenLineStartOffset = pos;
             return token = 14 /* LineBreakTrivia */;
         }
         switch (code) {
@@ -1289,6 +1293,13 @@ function createScanner(text, ignoreTrivia) {
                             break;
                         }
                         pos++;
+                        if (isLineBreak(ch)) {
+                            if (ch === 13 /* carriageReturn */ && text.charCodeAt(pos) === 10 /* lineFeed */) {
+                                pos++;
+                            }
+                            lineNumber++;
+                            tokenLineStartOffset = pos;
+                        }
                     }
                     if (!commentClosed) {
                         pos++;
@@ -1378,7 +1389,9 @@ function createScanner(text, ignoreTrivia) {
         getTokenValue: function () { return value; },
         getTokenOffset: function () { return tokenOffset; },
         getTokenLength: function () { return pos - tokenOffset; },
-        getTokenError: function () { return scanError; }
+        getTokenStartLine: function () { return lineStartOffset; },
+        getTokenStartCharacter: function () { return tokenOffset - prevTokenLineStartOffset; },
+        getTokenError: function () { return scanError; },
     };
 }
 function isWhiteSpace(ch) {
@@ -1392,7 +1405,7 @@ function isLineBreak(ch) {
 function isDigit(ch) {
     return ch >= 48 /* _0 */ && ch <= 57 /* _9 */;
 }
-//# sourceMappingURL=scanner.js.map
+
 
 /***/ }),
 
@@ -1443,7 +1456,7 @@ var createScanner = _impl_scanner_js__WEBPACK_IMPORTED_MODULE_2__["createScanner
 var getLocation = _impl_parser_js__WEBPACK_IMPORTED_MODULE_3__["getLocation"];
 /**
  * Parses the given text and returns the object the JSON content represents. On invalid input, the parser tries to be as fault tolerant as possible, but still return a result.
- * Therefore always check the errors list to find out if the input was valid.
+ * Therefore, always check the errors list to find out if the input was valid.
  */
 var parse = _impl_parser_js__WEBPACK_IMPORTED_MODULE_3__["parse"];
 /**
@@ -1455,7 +1468,7 @@ var parseTree = _impl_parser_js__WEBPACK_IMPORTED_MODULE_3__["parseTree"];
  */
 var findNodeAtLocation = _impl_parser_js__WEBPACK_IMPORTED_MODULE_3__["findNodeAtLocation"];
 /**
- * Finds the most inner node at the given offset. If includeRightBound is set, also finds nodes that end at the given offset.
+ * Finds the innermost node at the given offset. If includeRightBound is set, also finds nodes that end at the given offset.
  */
 var findNodeAtOffset = _impl_parser_js__WEBPACK_IMPORTED_MODULE_3__["findNodeAtOffset"];
 /**
@@ -1507,7 +1520,7 @@ function printParseErrorCode(code) {
  * removals of text segments. All offsets refer to the original state of the document. No two edits must change or remove the same range of
  * text in the original document. However, multiple edits can have
  * the same offset, for example multiple inserts, or an insert followed by a remove or replace. The order in the array defines which edit is applied first.
- * To apply edits to an input, you can use `applyEdits`
+ * To apply edits to an input, you can use `applyEdits`.
  */
 function format(documentText, range, options) {
     return _impl_format_js__WEBPACK_IMPORTED_MODULE_0__["format"](documentText, range, options);
@@ -1525,7 +1538,7 @@ function format(documentText, range, options) {
  * removals of text segments. All offsets refer to the original state of the document. No two edits must change or remove the same range of
  * text in the original document. However, multiple edits can have
  * the same offset, for example multiple inserts, or an insert followed by a remove or replace. The order in the array defines which edit is applied first.
- * To apply edits to an input, you can use `applyEdits`
+ * To apply edits to an input, you can use `applyEdits`.
  */
 function modify(text, path, value, options) {
     return _impl_edit_js__WEBPACK_IMPORTED_MODULE_1__["setProperty"](text, path, value, options.formattingOptions, options.getInsertionIndex);
@@ -1539,7 +1552,7 @@ function applyEdits(text, edits) {
     }
     return text;
 }
-//# sourceMappingURL=main.js.map
+
 
 /***/ }),
 
@@ -3109,6 +3122,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function setupMode(defaults) {
     var disposables = [];
+    var providers = [];
     var client = new _workerManager_js__WEBPACK_IMPORTED_MODULE_0__["WorkerManager"](defaults);
     disposables.push(client);
     var worker = function () {
@@ -3118,17 +3132,56 @@ function setupMode(defaults) {
         }
         return client.getLanguageServiceWorker.apply(client, uris);
     };
-    var languageId = defaults.languageId;
-    disposables.push(monaco.languages.registerCompletionItemProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["CompletionAdapter"](worker)));
-    disposables.push(monaco.languages.registerHoverProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["HoverAdapter"](worker)));
-    disposables.push(monaco.languages.registerDocumentSymbolProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["DocumentSymbolAdapter"](worker)));
-    disposables.push(monaco.languages.registerDocumentFormattingEditProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["DocumentFormattingEditProvider"](worker)));
-    disposables.push(monaco.languages.registerDocumentRangeFormattingEditProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["DocumentRangeFormattingEditProvider"](worker)));
-    disposables.push(new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["DiagnosticsAdapter"](languageId, worker, defaults));
-    disposables.push(monaco.languages.setTokensProvider(languageId, Object(_tokenization_js__WEBPACK_IMPORTED_MODULE_2__["createTokenizationSupport"])(true)));
-    disposables.push(monaco.languages.setLanguageConfiguration(languageId, richEditConfiguration));
-    disposables.push(monaco.languages.registerColorProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["DocumentColorAdapter"](worker)));
-    disposables.push(monaco.languages.registerFoldingRangeProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["FoldingRangeAdapter"](worker)));
+    function registerProviders() {
+        var languageId = defaults.languageId, modeConfiguration = defaults.modeConfiguration;
+        disposeAll(providers);
+        if (modeConfiguration.documentFormattingEdits) {
+            providers.push(monaco.languages.registerDocumentFormattingEditProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["DocumentFormattingEditProvider"](worker)));
+        }
+        if (modeConfiguration.documentRangeFormattingEdits) {
+            providers.push(monaco.languages.registerDocumentRangeFormattingEditProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["DocumentRangeFormattingEditProvider"](worker)));
+        }
+        if (modeConfiguration.completionItems) {
+            providers.push(monaco.languages.registerCompletionItemProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["CompletionAdapter"](worker)));
+        }
+        if (modeConfiguration.hovers) {
+            providers.push(monaco.languages.registerHoverProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["HoverAdapter"](worker)));
+        }
+        if (modeConfiguration.documentSymbols) {
+            providers.push(monaco.languages.registerDocumentSymbolProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["DocumentSymbolAdapter"](worker)));
+        }
+        if (modeConfiguration.tokens) {
+            providers.push(monaco.languages.setTokensProvider(languageId, Object(_tokenization_js__WEBPACK_IMPORTED_MODULE_2__["createTokenizationSupport"])(true)));
+        }
+        if (modeConfiguration.colors) {
+            providers.push(monaco.languages.registerColorProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["DocumentColorAdapter"](worker)));
+        }
+        if (modeConfiguration.foldingRanges) {
+            providers.push(monaco.languages.registerFoldingRangeProvider(languageId, new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["FoldingRangeAdapter"](worker)));
+        }
+        if (modeConfiguration.diagnostics) {
+            providers.push(new _languageFeatures_js__WEBPACK_IMPORTED_MODULE_1__["DiagnosticsAdapter"](languageId, worker, defaults));
+        }
+    }
+    registerProviders();
+    disposables.push(monaco.languages.setLanguageConfiguration(defaults.languageId, richEditConfiguration));
+    var modeConfiguration = defaults.modeConfiguration;
+    defaults.onDidChange(function (newDefaults) {
+        if (newDefaults.modeConfiguration !== modeConfiguration) {
+            modeConfiguration = newDefaults.modeConfiguration;
+            registerProviders();
+        }
+    });
+    disposables.push(asDisposable(providers));
+    return asDisposable(disposables);
+}
+function asDisposable(disposables) {
+    return { dispose: function () { return disposeAll(disposables); } };
+}
+function disposeAll(disposables) {
+    while (disposables.length) {
+        disposables.pop().dispose();
+    }
 }
 var richEditConfiguration = {
     wordPattern: /(-?\d*\.\d\w*)|([^\[\{\]\}\:\"\,\s]+)/g,
@@ -3510,7 +3563,8 @@ var DocumentSymbolAdapter = /** @class */ (function () {
                 containerName: item.containerName,
                 kind: toSymbolKind(item.kind),
                 range: toRange(item.location.range),
-                selectionRange: toRange(item.location.range)
+                selectionRange: toRange(item.location.range),
+                tags: []
             }); });
         });
     };
