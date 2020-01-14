@@ -6,8 +6,8 @@ var urlsToCache = [
   // dist
   "https://ishikawamasashi.github.io/QBasic/dist/0.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/1.bundle.js",
-   "https://ishikawamasashi.github.io/QBasic/dist/2.bundle.js",
-   "https://ishikawamasashi.github.io/QBasic/dist/3.bundle.js",
+  "https://ishikawamasashi.github.io/QBasic/dist/2.bundle.js",
+  "https://ishikawamasashi.github.io/QBasic/dist/3.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/4.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/5.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/6.bundle.js",
@@ -71,9 +71,11 @@ var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/dist/64.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/65.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/66.bundle.js",
+  "https://ishikawamasashi.github.io/QBasic/dist/67.bundle.js",
+  "https://ishikawamasashi.github.io/QBasic/dist/68.bundle.js",
 
-  "https://ishikawamasashi.github.io/QBasic/dist/html.worker.js",
   "https://ishikawamasashi.github.io/QBasic/dist/main.bundle.js",
+  "https://ishikawamasashi.github.io/QBasic/dist/html.worker.js",
   // "https://ishikawamasashi.github.io/QBasic/dist/monaco-editor.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/syntax-highlighter.js",
 

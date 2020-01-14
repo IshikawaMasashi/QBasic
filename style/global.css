@@ -36,9 +36,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-smoothing: antialiased;
+  /* font-smoothing: antialiased; */
   text-rendering: optimizeLegibility;
-  font-smooth: always;
+  /* font-smooth: always; */
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   min-height: 100%;
@@ -46,7 +46,7 @@ body {
   height: 100%;
   /*background: var(--grey-1000);*/
   background: #1a1a1a;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -ms-overflow-style: scrollbar; /* なぜか、この設定にしないとスクロールバーが表示されない */
   color: #ffffff;
   overflow: hidden;
   -webkit-user-select: none;
@@ -63,9 +63,9 @@ input {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-smoothing: antialiased;
+  /* font-smoothing: antialiased; */
   text-rendering: optimizeLegibility;
-  font-smooth: always;
+  /* font-smooth: always; */
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 }
@@ -446,8 +446,6 @@ a {
   vertical-align: text-top;
   fill: currentColor;
 }
-
-
 
 .button .octicon {
   padding-left: 4px;
@@ -1106,7 +1104,7 @@ a {
 
 .content {
   display: flex;
-  height: calc(100vh - 44px);
+  height: calc(100vh - 52px); /*TitleBar 30px + StatusBar 22px */
 }
 
 .windows {
