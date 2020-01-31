@@ -1,4 +1,4 @@
-﻿var CACHE_NAME = "QBasic-cache-v23";
+﻿var CACHE_NAME = "QBasic-cache-v24";
 var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/",
   "https://ishikawamasashi.github.io/QBasic/index.html",
