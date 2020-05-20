@@ -5,8 +5,8 @@ var urlsToCache = [
 
   // dist
   "https://ishikawamasashi.github.io/QBasic/dist/0.bundle.js",
-  "https://ishikawamasashi.github.io/QBasic/dist/1.bundle.js",
-  "https://ishikawamasashi.github.io/QBasic/dist/2.bundle.js",
+  // "https://ishikawamasashi.github.io/QBasic/dist/1.bundle.js",
+  // "https://ishikawamasashi.github.io/QBasic/dist/2.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/3.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/4.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/5.bundle.js",
@@ -71,20 +71,19 @@ var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/dist/64.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/65.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/66.bundle.js",
-  "https://ishikawamasashi.github.io/QBasic/dist/67.bundle.js",
-  "https://ishikawamasashi.github.io/QBasic/dist/68.bundle.js",
+  // "https://ishikawamasashi.github.io/QBasic/dist/67.bundle.js",
+  // "https://ishikawamasashi.github.io/QBasic/dist/68.bundle.js",
 
   "https://ishikawamasashi.github.io/QBasic/dist/main.bundle.js",
-  "https://ishikawamasashi.github.io/QBasic/dist/html.worker.js",
   // "https://ishikawamasashi.github.io/QBasic/dist/monaco-editor.bundle.js",
-  "https://ishikawamasashi.github.io/QBasic/dist/syntax-highlighter.js",
-
+  // "https://ishikawamasashi.github.io/QBasic/dist/syntax-highlighter.js",
+  
+  "https://ishikawamasashi.github.io/QBasic/dist/html.worker.js",
   "https://ishikawamasashi.github.io/QBasic/dist/editor.worker.js",
   "https://ishikawamasashi.github.io/QBasic/dist/css.worker.js",
   "https://ishikawamasashi.github.io/QBasic/dist/json.worker.js",
-  "https://ishikawamasashi.github.io/QBasic/dist/typescript.worker.js",
+  "https://ishikawamasashi.github.io/QBasic/dist/ts.worker.js",
 
-  // "https://ishikawamasashi.github.io/QBasic/dist/vendors~monaco-editor~monaco-languages.bundle.js",
   "https://ishikawamasashi.github.io/QBasic/dist/worker.bundle.js",
   // style
   "https://ishikawamasashi.github.io/QBasic/style/markdown.css",
@@ -93,7 +92,7 @@ var urlsToCache = [
   "https://ishikawamasashi.github.io/QBasic/style/theme.css",
   "https://ishikawamasashi.github.io/QBasic/style/global.css",
 
-  "https://ishikawamasashi.github.io/QBasic/lib/typescript/typescript.min.js"
+  // "https://ishikawamasashi.github.io/QBasic/lib/typescript/typescript.min.js"
 ];
 
 const CACHE_KEYS = [CACHE_NAME];
